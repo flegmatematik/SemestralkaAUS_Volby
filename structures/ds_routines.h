@@ -80,7 +80,7 @@ namespace structures
 	inline int DSRoutines::indexInVector(std::vector<T>& vector, const T & item)
 	{
 		int result = 0;
-		for (std::vector<T>::iterator it = vector.begin(); it != vector.end(); it++)
+		for (typename std::vector<T>::iterator it = vector.begin(); it != vector.end(); ++it)
 		{
 			if (*it == item)
 			{

@@ -1,7 +1,7 @@
 #include "ds_structure_factory.h"
 #include "ds_routines.h"
-#include "../ui/ui_routines.h"
-#include "../ui/logger/ui_logger.h"
+//#include "../ui/ui_routines.h"
+//#include "../ui/logger/ui_logger.h"
 
 using namespace std;
 
@@ -118,9 +118,10 @@ namespace structures {
 		if (getADSFactoryByType(ads) == nullptr)
 			adsFactories_->push_back(new ADSFactory(ads, prototype));
 		else
-			throw logic_error("Prototype for type " + ui::UIRoutines::convertStructureADSToStr(ads) + " is already registered!");
+			throw logic_error("Prototype for type is already registered!");
+			//+ ui::UIRoutines::convertStructureADSToStr(ads) + " is already registered!");
 	}
-
+	
 	Structure * ADTFactoryManager::getStructureInstance(StructureADS ads)
 	{
 		ADSFactory* adsFactory = getADSFactoryByType(ads);
@@ -135,8 +136,12 @@ namespace structures {
 			return origin.structure;
 		}
 		else
-			throw logic_error("Can not create structure of type " + ui::UIRoutines::convertStructureADSToStr(ads) + "!");
+			throw logic_error("Can not create structure of type "
+				//+ ui::UIRoutines::convertStructureADSToStr(ads)
+				);
+			
 	}
+
 
 	Structure * ADTFactoryManager::cloneStructureAtIndex(const int index)
 	{
@@ -144,25 +149,28 @@ namespace structures {
 		{
 			StructureOrigin origin = producedStructures_->at(index);
 			origin.structure = origin.adsFactory->cloneStructure(origin.structure);
-			
+
 			producedStructures_->push_back(origin);
 			return origin.structure;
 		}
 		else
-			throw logic_error("Can not clone structure from index " + ui::UIRoutines::convertIntToStr(index) + "!");
+			throw logic_error("Can not clone structure from index !");
+			//+ ui::UIRoutines::convertIntToStr(index) + "!");
 	}
 
 	void ADTFactoryManager::removeStructure(const int index)
 	{
-		if (DSRoutines::rangeCheck(index, producedStructures_->size())) 
+		if (DSRoutines::rangeCheck(index, producedStructures_->size()))
 		{
 			StructureOrigin origin = producedStructures_->at(index);
 			origin.adsFactory->removeStructure(origin.structure);
 			producedStructures_->erase(producedStructures_->begin() + index);
 		}
 		else
-			throw logic_error("Can not remove structure from index " + ui::UIRoutines::convertIntToStr(index) + "!");
+			throw logic_error("Can not remove structure from index !");
+			//+ ui::UIRoutines::convertIntToStr(index) + "!");
 	}
+	
 
 	ADSFactory * ADTFactoryManager::getADSFactoryByType(const StructureADS ads) const
 	{
@@ -225,15 +233,16 @@ namespace structures {
 			ADTFactoryManager* adtManager = (*adtManagers_)[adt];
 			adtManager->registerPrototype(ads, prototype);
 
-			ui::log::Logger::getInstance()->logHint("Prototype of " + ui::UIRoutines::convertStructureADSToStr(ads) + " successfully registered.");
+			//ui::log::Logger::getInstance()->logHint("Prototype of " + ui::UIRoutines::convertStructureADSToStr(ads) + " successfully registered.");
 			return true;
 		}
 		catch (exception ex)
 		{
-			ui::log::Logger::getInstance()->logHint("Registration of " + ui::UIRoutines::convertStructureADSToStr(ads) + " prototype failed: " + ex.what());
+			//ui::log::Logger::getInstance()->logHint("Registration of " + ui::UIRoutines::convertStructureADSToStr(ads) + " prototype failed: " + ex.what());
 			return false;
 		}
 	}
+	
 
 	Structure * StructureFactory::getStructureInstance(StructureADS ads)
 	{

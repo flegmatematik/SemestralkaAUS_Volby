@@ -3,42 +3,51 @@
 namespace structures {
 	byte & MemoryRoutines::byteSet(byte & B)
 	{
-		return B = MAX_BYTE;
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 	byte & MemoryRoutines::byteReset(byte & B)
 	{
-		return B = 0;
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 	byte & MemoryRoutines::byteXOR(byte & B)
 	{
-		return B ^= MAX_BYTE;
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 	byte & MemoryRoutines::byteSHL(byte & B)
 	{
-		return B <<= 1;
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 	byte & MemoryRoutines::byteSHR(byte & B)
 	{
-		return B >>= 1;
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 	bool MemoryRoutines::byteNthBitGet(byte & B, int n)
 	{
-		return (B & (1 << n)) > 0;
+		//TODO 01: MemoryRoutines
+		return false;
 	}
 
 	byte & MemoryRoutines::byteNthBitTo0(byte & B, int n)
 	{
-		return B &= ~(1 << n);
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 
 	byte & MemoryRoutines::byteNthBitTo1(byte & B, int n)
 	{
-		return B |= (1 << n);
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 
 	byte & MemoryRoutines::byteNthBitToggle(byte & B, int n)
 	{
-		return B ^= (1 << n);
+		//TODO 01: MemoryRoutines
+		return B;
 	}
 
 	MemoryRoutines::MemoryRoutines()
