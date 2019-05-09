@@ -152,7 +152,7 @@ namespace structures
 	}
 
 	template<typename K, typename T>
-	inline const T SequenceTable<K, T>::operator[](const K key) const
+	inline const T SequenceTable<K, T>::operator[](const K key) const 
 	{
 		TableItem<K, T> *item = findTableItem(key);
 		if (item == nullptr)
@@ -168,10 +168,10 @@ namespace structures
 	template<typename K, typename T>
 	inline void SequenceTable<K, T>::insert(const K & key, const T & data)
 	{
-		if(!containsKey(key))
-		{
+		//if(!containsKey(key))
+		//{
 			list_->add(new TableItem<K, T>(key, data));
-		}
+		//}
 		
 	}
 
@@ -202,11 +202,7 @@ namespace structures
 	template<typename K, typename T>
 	inline bool SequenceTable<K, T>::containsKey(const K & key)
 	{
-		if(this->findTableItem(key) != nullptr)
-		{
-			return true;
-		}
-		return false;
+		return (this->findTableItem(key) != nullptr);	
 	}
 
 	template<typename K, typename T>
@@ -241,9 +237,9 @@ namespace structures
 	template<typename K, typename T>
 	inline TableItem<K, T>* SequenceTable<K, T>::findTableItem(const K & key) const
 	{
-		for (TableItem<K,T> *item : *list_)
+		for (TableItem<K, T> *item : *list_)
 		{
-			if(item->getKey() == key)
+			if (item->getKey() == key)
 			{
 				return item;
 			}

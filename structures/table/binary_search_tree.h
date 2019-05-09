@@ -4,7 +4,6 @@
 #include "../list/list.h"
 #include "../tree/binary_tree.h"
 #include <stdexcept>
-#include <chrono>
 
 namespace structures
 {
@@ -226,7 +225,7 @@ namespace structures
 		{
 			TableItem<K, T> *titem = new TableItem<K, T>(key, data);
 			BinaryTreeNode<TableItem<K, T>*>* syn = new BinaryTreeNode<TableItem<K, T>*>(titem);
-			if(size_ == 0)
+			if(this->isEmpty())
 			{
 				binaryTree_->replaceRoot(syn);
 			}
@@ -239,10 +238,13 @@ namespace structures
 				{
 					item->setLeftSon(syn);
 				}
-				size_++;
 			}
+			size_++;
 		}
-		throw std::exception("uz sa tu nachadza");
+		else 
+		{
+			throw std::exception("uz sa tu nachadza");
+		}
 	}
 
 	template<typename K, typename T>
@@ -305,7 +307,7 @@ namespace structures
 		//inorder
 		//TODO 10: BinarySearchTree
 		//return new structures::BinaryTree<TableItem<K, T>*>::InOrderTreeIterator(binaryTree_->getRoot());
-		return new typename BinaryTree<TableItem<K, T>*>::InOrderTreeIterator(binaryTree_->getRoot());
+		return new BinaryTree<TableItem<K, T>*>::InOrderTreeIterator(binaryTree_->getRoot());
 	}
 
 	template<typename K, typename T>
@@ -328,8 +330,8 @@ namespace structures
 			if (uzol != nullptr)
 				hladany = uzol; //posledny platny
 		}
-		found = (uzol != nullptr) && (uzol->accessData()->getKey() == key);
-		return hladany;
+		found = uzol != nullptr && (uzol->accessData()->getKey() == key);
+			return hladany;
 
 	}
 

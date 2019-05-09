@@ -102,7 +102,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -134,7 +134,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -144,7 +144,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CitanieDat.cpp" />
+    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="FilterNazov.cpp" />
+    <ClCompile Include="Kraj.cpp" />
+    <ClCompile Include="KriteriumNazov.cpp" />
+    <ClCompile Include="KriteriumOdovzdaneObalky.cpp" />
+    <ClCompile Include="KriteriumPrislusnostObce.cpp" />
+    <ClCompile Include="KriteriumUcast.cpp" />
+    <ClCompile Include="KriteriumVolici.cpp" />
+    <ClCompile Include="KriteriumVydaneObalky.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obec.cpp" />
+    <ClCompile Include="Okres.cpp" />
     <ClCompile Include="structures\ds_routines.cpp" />
     <ClCompile Include="structures\ds_structure_factory.cpp" />
     <ClCompile Include="structures\graph\algorithms\dijkstra.cpp" />
@@ -156,8 +168,25 @@
     <ClCompile Include="structures\structure.cpp" />
     <ClCompile Include="structures\table\sorting\sort.cpp" />
     <ClCompile Include="structures\vector\vector.cpp" />
+    <ClCompile Include="UzemnaJednotka.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CitanieDat.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="FilterDvaParam.h" />
+    <ClInclude Include="FilterJedenParam.h" />
+    <ClInclude Include="FilterNazov.h" />
+    <ClInclude Include="Kraj.h" />
+    <ClInclude Include="Kriterium.h" />
+    <ClInclude Include="KriteriumNazov.h" />
+    <ClInclude Include="KriteriumOdovzdaneObalky.h" />
+    <ClInclude Include="KriteriumPrislusnostObce.h" />
+    <ClInclude Include="KriteriumUcast.h" />
+    <ClInclude Include="KriteriumVolici.h" />
+    <ClInclude Include="KriteriumVydaneObalky.h" />
+    <ClInclude Include="Obec.h" />
+    <ClInclude Include="Okres.h" />
     <ClInclude Include="structures\array\array.h" />
     <ClInclude Include="structures\ds_routines.h" />
     <ClInclude Include="structures\ds_structure_factory.h" />
@@ -211,6 +240,15 @@
     <ClInclude Include="structures\tree\multi_way_tree.h" />
     <ClInclude Include="structures\tree\tree.h" />
     <ClInclude Include="structures\vector\vector.h" />
+    <ClInclude Include="UzemnaJednotka.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PRE_2019_KOLO1_kraje_korektne.csv" />
+    <None Include="PRE_2019_KOLO1_obce_korektne.csv" />
+    <None Include="PRE_2019_KOLO1_okresy_korektne.csv" />
+    <None Include="PRE_2019_KOLO2_kraje_korektne.csv" />
+    <None Include="PRE_2019_KOLO2_obce_korektne.csv" />
+    <None Include="PRE_2019_KOLO2_okresy_korektne.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

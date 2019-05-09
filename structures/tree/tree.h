@@ -3,7 +3,6 @@
 #include "../structure.h"
 #include "../structure_iterator.h"
 #include <queue>
-#include "../queue/explicit_queue.h"
 
 namespace structures
 {
@@ -203,7 +202,7 @@ namespace structures
 			Iterator<T>& operator++() override;
 		protected:
 			/// <summary> Prehliadka stromu. </summary>
-			ExplicitQueue<TreeNode<T>*>* path_;
+			std::queue<TreeNode<T>*>* path_;
 		};
 
 	public:
@@ -419,7 +418,7 @@ namespace structures
 	template<typename T>
 	inline Tree<T>::TreeIterator::TreeIterator():
 		Iterator<T>(),
-		path_(new ExplicitQueue<TreeNode<T>*>())
+		path_(new std::queue<TreeNode<T>*>())
 	{
 	}
 
@@ -433,20 +432,22 @@ namespace structures
 	inline Iterator<T>& Tree<T>::TreeIterator::operator=(const Iterator<T>& other)
 	{
 		//TODO 08: Tree<T>::TreeIterator
-		throw std::exception("Tree<T>::TreeIterator::operator=: Not implemented yet.");
+		//dereferencovat
+		*path_ = *dynamic_cast<const TreeIterator&>(other).path_;
+		return *this;
 	}
 
 	template<typename T>
 	inline bool Tree<T>::TreeIterator::operator!=(const Iterator<T>& other)
 	{
 		//TODO 08: Tree<T>::TreeIterator
-		throw std::exception("Tree<T>::TreeIterator::operator!=: Not implemented yet.");
+		return *path_ != *(dynamic_cast<const TreeIterator&>(other).path_);
 	}
 
 	template<typename T>
 	inline const T Tree<T>::TreeIterator::operator*()
 	{
-		TreeNode<T>* current = path_->peek();
+		TreeNode<T>* current = path_->front();
 		return current->accessData();
 	}
 
@@ -502,23 +503,28 @@ namespace structures
 	template<typename T>
 	inline void Tree<T>::LevelOrderTreeIterator::populatePath(TreeNode<T>* const current)
 	{
-		ExplicitQueue<TreeNode<T>*>* processQueue = new ExplicitQueue<TreeNode<T>*>;
-		processQueue->push(current);
-		while(!processQueue->isEmpty())
-		{
-			TreeNode<T>* processNode = processQueue->pop();
+		std::queue<TreeNode<T>*>* processQueue = new std::queue<TreeNode<T>*>();
 
-			if(processNode != nullptr)
+		processQueue->push(current);
+
+		while (!processQueue->empty())
+		{
+			TreeNode<T>* processNode = processQueue->front();
+			processQueue->pop();
+
+			if (processNode != nullptr)
 			{
 				
-				path_->push(processNode);
-				for (int i = 0; i < current->degree(); ++i)
+				this->path_->push(processNode);
+
+				for (int i = 0; i < current->degree(); i++)
 				{
 					processQueue->push(current->getSon(i));
 				}
-
 			}
 		}
+
+		delete processQueue;
 	}
 
 }

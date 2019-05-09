@@ -2,6 +2,7 @@
 
 #include "../list/array_list.h"
 #include "sequence_table.h"
+#include <algorithm>
 
 namespace structures
 {
@@ -67,7 +68,18 @@ namespace structures
 	inline void SortedSequenceTable<K, T>::insert(const K & key, const T & data)
 	{
 		//TODO 09: SortedSequenceTable
-		throw std::exception("SortedSequenceTable<K, T>::insert: Not implemented yet.");
+		// najprv najst pomocou indexOfkey, ak uz je tak logic error
+		bool jeRovnaky;
+		indexOfKey(key, 0, this->size(), jeRovnaky);
+
+		if(!jeRovnaky)
+		{
+			
+		}
+		else
+		{
+			throw std::logic_error("Prvok s danym klucom tu uz je.");
+		}
 	}
 
 	template<typename K, typename T>
@@ -81,6 +93,34 @@ namespace structures
 	inline int SortedSequenceTable<K, T>::indexOfKey(const K & key, int indexStart, int indexEnd, bool & found) const
 	{
 		//TODO 09: SortedSequenceTable
-		throw std::exception("SortedSequenceTable<K, T>::indexOfKey: Not implemented yet.");
+		int stred = (indexStart + indexEnd) / 2;
+		K klucVstrede = (*this->list_)[stred]->getKey();
+
+		if((*this->list_)[stred]->getKey() == key)
+		{
+			found = true;
+			return stred;
+		}
+		else
+		{
+			if(indexStart == indexEnd)
+			{
+				found = false;
+				if (key < klucVstrede)
+					return  stred;
+				return  stred + 1;
+			}
+			else
+			{
+				if(klucVstrede < key)
+				{
+					indexStart = stred + 1;
+				}
+				else
+				{
+					indexEnd = stred;
+				}
+			}
+		}
 	}
 }
