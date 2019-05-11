@@ -11,7 +11,7 @@ KriteriumVolici::~KriteriumVolici()
 {
 }
 
-int KriteriumVolici::ohodnot(UzemnaJednotka& objekt)
+int KriteriumVolici::ohodnot(UzemnaJednotka* objekt)
 {
-	return objekt.pocetZapisanychVolicovVKole(kolo);
+	return objekt->pocetZapisanychVolicovVKole(kolo);
 }

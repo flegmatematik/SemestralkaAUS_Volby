@@ -12,7 +12,7 @@ KriteriumVydaneObalky::~KriteriumVydaneObalky()
 {
 }
 
-int KriteriumVydaneObalky::ohodnot(UzemnaJednotka& objekt)
+int KriteriumVydaneObalky::ohodnot(UzemnaJednotka* objekt)
 {
-	return objekt.pocetVydanychObalokVKole(kolo);
+	return objekt->pocetVydanychObalokVKole(kolo);
 }

@@ -9,7 +9,7 @@ KriteriumUcast::~KriteriumUcast()
 {
 }
 
-double KriteriumUcast::ohodnot( UzemnaJednotka& objekt)
+double KriteriumUcast::ohodnot( UzemnaJednotka* objekt)
 {
-	return objekt.ucastVolicovVKole(kolo); 
+	return objekt->ucastVolicovVKole(kolo); 
 }

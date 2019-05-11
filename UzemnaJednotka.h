@@ -20,10 +20,11 @@ public:
 	int pocetOdovzdanychObalokVKole(int kolo);
 	int pocetPlatnych(int kolo);
 	virtual std::string toString();
+	UzemnaJednotka(Data *p_prveKolo, Data *p_druheKolo, int p_kodUzemnejJednotky, std::string p_nazovUzemnejJednotky, UzemnaJednotka* p_vyssia = nullptr);
+	~UzemnaJednotka();
 protected:
 	Data *prveKolo;
 	Data *druheKolo;
-	UzemnaJednotka(Data *p_prveKolo, Data *p_druheKolo,int p_kodUzemnejJednotky, std::string p_nazovUzemnejJednotky, UzemnaJednotka* p_vyssia = nullptr);
-	virtual ~UzemnaJednotka();
+	
 };
 

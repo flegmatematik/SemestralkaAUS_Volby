@@ -10,7 +10,7 @@ KriteriumPrislusnostObce::~KriteriumPrislusnostObce()
 {
 }
 
-bool KriteriumPrislusnostObce::ohodnot(Obec& objekt)
+bool KriteriumPrislusnostObce::ohodnot(Obec* objekt)
 {
-	return objekt.patriDoVyssiehoCelku(nazovVyssiehoCelku);
+	return objekt->patriDoVyssiehoCelku(nazovVyssiehoCelku);
 }

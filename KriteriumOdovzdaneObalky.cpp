@@ -10,7 +10,7 @@ KriteriumOdovzdaneObalky::~KriteriumOdovzdaneObalky()
 {
 }
 
-int KriteriumOdovzdaneObalky::ohodnot(UzemnaJednotka& objekt)
+int KriteriumOdovzdaneObalky::ohodnot(UzemnaJednotka* objekt)
 {
-	return objekt.pocetOdovzdanychObalokVKole(kolo);
+	return objekt->pocetOdovzdanychObalokVKole(kolo);
 }

@@ -11,9 +11,9 @@ KriteriumNazov::~KriteriumNazov()
 {
 }
 
-std::string KriteriumNazov::ohodnot(UzemnaJednotka& objekt)
+std::string KriteriumNazov::ohodnot(UzemnaJednotka* objekt)
 {
-	return objekt.nazov();
+	return objekt->nazov();
 }
 
 
