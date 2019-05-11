@@ -90,6 +90,9 @@
     <ClCompile Include="FilterNazov.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rozhranie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures\array\array.h">
@@ -300,6 +303,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FilterNazov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rozhranie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

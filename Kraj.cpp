@@ -8,7 +8,12 @@ Kraj::Kraj(Data* p_prveKolo, Data* p_druheKolo, int p_kodKraja, std::string p_na
 
 std::string Kraj::toString()
 {
-	return "Kod kraja: " + std::to_string(kod()) + " Nazov kraja: " + nazov() + "\nPrve kolo: " + prveKolo->toString() + "\nDruhe kolo: " + druheKolo->toString();
+	return "Kraj: " + nazov() + "\nPrve kolo: " + prveKolo->toString() + "\nDruhe kolo: " + druheKolo->toString() + "\n";
+}
+
+bool Kraj::patriDoVyssiehoUzemnehoCelku(std::string nazov)
+{
+	return false;
 }
 
 Kraj::~Kraj()

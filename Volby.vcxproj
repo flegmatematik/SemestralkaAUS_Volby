@@ -157,6 +157,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obec.cpp" />
     <ClCompile Include="Okres.cpp" />
+    <ClCompile Include="Rozhranie.cpp" />
     <ClCompile Include="structures\ds_routines.cpp" />
     <ClCompile Include="structures\ds_structure_factory.cpp" />
     <ClCompile Include="structures\graph\algorithms\dijkstra.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="KriteriumVydaneObalky.h" />
     <ClInclude Include="Obec.h" />
     <ClInclude Include="Okres.h" />
+    <ClInclude Include="Rozhranie.h" />
     <ClInclude Include="structures\array\array.h" />
     <ClInclude Include="structures\ds_routines.h" />
     <ClInclude Include="structures\ds_structure_factory.h" />

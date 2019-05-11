@@ -70,11 +70,13 @@ namespace structures
 		//TODO 09: SortedSequenceTable
 		// najprv najst pomocou indexOfkey, ak uz je tak logic error
 		bool jeRovnaky;
-		indexOfKey(key, 0, this->size(), jeRovnaky);
+		//ak tam nieje, vrati na ake miesto to moze vlozit
+		int naKtoreMiesto = indexOfKey(key, 0, this->size(), jeRovnaky);
 
 		if(!jeRovnaky)
 		{
-			
+			TableItem<K, T>* novyPrvok = new TableItem<K, T>(key, data);
+			this->list_->insert(novyPrvok, naKtoreMiesto);
 		}
 		else
 		{
@@ -86,16 +88,37 @@ namespace structures
 	inline TableItem<K, T>* SortedSequenceTable<K, T>::findTableItem(const K & key) const
 	{
 		//TODO 09: SortedSequenceTable
-		throw std::exception("SortedSequenceTable<K, T>::findTableItem: Not implemented yet.");
+		// bisekcia uz v indexOfKey
+		if(this->size() == 0)
+		{
+			return nullptr;
+		}
+
+		bool jeTam = false;
+		int index = indexOfKey(key, 0, this->size(), jeTam);
+		if(jeTam)
+		{
+			return (*this->list_)[index];
+		}
+		else
+		{
+			return nullptr;
+		}
+
 	}
 
 	template<typename K, typename T>
 	inline int SortedSequenceTable<K, T>::indexOfKey(const K & key, int indexStart, int indexEnd, bool & found) const
 	{
 		//TODO 09: SortedSequenceTable
+		if(indexStart == this->size())
+		{
+			found = false;
+			return this->size();
+		}
 		int stred = (indexStart + indexEnd) / 2;
 		K klucVstrede = (*this->list_)[stred]->getKey();
-
+		//bisekcia
 		if((*this->list_)[stred]->getKey() == key)
 		{
 			found = true;
@@ -120,6 +143,8 @@ namespace structures
 				{
 					indexEnd = stred;
 				}
+				//rekurzia
+				return indexOfKey(key, indexStart, indexEnd, found);
 			}
 		}
 	}

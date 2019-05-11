@@ -10,7 +10,8 @@ KriteriumPrislusnostObce::~KriteriumPrislusnostObce()
 {
 }
 
-bool KriteriumPrislusnostObce::ohodnot(Obec* objekt)
+bool KriteriumPrislusnostObce::ohodnot(UzemnaJednotka* objekt)
 {
-	return objekt->patriDoVyssiehoCelku(nazovVyssiehoCelku);
+	return objekt->patriDoVyssiehoUzemnehoCelku(nazovVyssiehoCelku);
 }
+

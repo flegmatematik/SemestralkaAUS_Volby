@@ -8,9 +8,16 @@
 #include "FilterJedenParam.h"
 #include "FilterNazov.h"
 #include "structures/table/sorting/heap_sort.h"
+#include "KriteriumOdovzdaneObalky.h"
+#include "KriteriumPrislusnostObce.h"
+#include "KriteriumVolici.h"
+#include "KriteriumUcast.h"
+#include "structures/table/sorted_sequence_table.h"
 
 
-CitanieDat::CitanieDat()
+CitanieDat::CitanieDat(structures::SortedSequenceTable<int, UzemnaJednotka*>& p_kraje,
+	structures::SortedSequenceTable<int, UzemnaJednotka*>& p_okresy,
+	structures::SortedSequenceTable<int, UzemnaJednotka*>& p_obce)
 {
 	std::string obcekolo1 = "PRE_2019_KOLO1_obce_korektne.csv";
 	std::string obcekolo2 = "PRE_2019_KOLO2_obce_korektne.csv";
@@ -19,11 +26,15 @@ CitanieDat::CitanieDat()
 	std::string krajekolo1 = "PRE_2019_KOLO1_kraje_korektne.csv";
 	std::string krajekolo2 = "PRE_2019_KOLO2_kraje_korektne.csv";
 
+	structures::SortedSequenceTable<int, UzemnaJednotka*>* obce = &p_obce;
+	structures::SortedSequenceTable<int, UzemnaJednotka*>* okresy = &p_okresy;
+	structures::SortedSequenceTable<int, UzemnaJednotka*>* kraje = &p_kraje;
+	/*
 	structures::UnsortedSequenceTable<int, UzemnaJednotka*>* obseq = new structures::UnsortedSequenceTable<int, UzemnaJednotka*>;
 	structures::BinarySearchTree<int, UzemnaJednotka*> ObceStrom_;
 	structures::BinarySearchTree<int, UzemnaJednotka*> OkresyStrom_;
 	structures::BinarySearchTree<int, UzemnaJednotka*> KrajeStrom_;
-
+	*/
 
 	std::ifstream citacObce1(obcekolo1);
 	std::ifstream citacObce2(obcekolo2);
@@ -31,6 +42,7 @@ CitanieDat::CitanieDat()
 	std::ifstream citacOkresy2(okresykolo2);
 	std::ifstream citacKraje1(krajekolo1);
 	std::ifstream citacKraje2(krajekolo2);
+
 
 	if(citacKraje1.is_open() && citacKraje2.is_open())
 	{
@@ -64,7 +76,7 @@ CitanieDat::CitanieDat()
 
 			Data *koloDva = new Data(stoi(pocet_volicov), stoi(obalky_vydane), stod(ucast_volicov), stoi(obalky_odovzdane), stoi(platne_dokopy));
 			Kraj *kraj = new Kraj(koloJedna, koloDva, stoi(p_kodKraja), p_nazovKraja);
-			KrajeStrom_.insert(stoi(p_kodKraja),kraj);
+			kraje->insert(stoi(p_kodKraja),kraj);
 
 		}
 	}
@@ -106,8 +118,8 @@ CitanieDat::CitanieDat()
 
 			Data *koloDva = new Data(stoi(pocet_volicov), stoi(obalky_vydane), stod(ucast_volicov), stoi(obalky_odovzdane), stoi(platne_dokopy));
 
-			Okres *okres = new Okres(koloJedna, koloDva,stoi(p_kodOkresu), p_nazovOkresu, KrajeStrom_[std::stoi(p_kodKraja)]);
-			OkresyStrom_.insert(stoi(p_kodOkresu),okres);
+			Okres *okres = new Okres(koloJedna, koloDva,stoi(p_kodOkresu), p_nazovOkresu, (*kraje)[std::stoi(p_kodKraja)]);
+			okresy->insert(stoi(p_kodOkresu),okres);
 		}
 	}
 
@@ -150,46 +162,79 @@ CitanieDat::CitanieDat()
 
 			Data *koloDva = new Data(stoi(pocet_volicov), stoi(obalky_vydane), stod(ucast_volicov), stoi(obalky_odovzdane), stoi(platne_dokopy));
 			
-			Obec *obec = new Obec(koloJedna, koloDva, std::stoi(p_kodObce), p_nazovObce,OkresyStrom_[stoi(p_kodOkresu)]);
+			Obec *obec = new Obec(koloJedna, koloDva, std::stoi(p_kodObce), p_nazovObce,(*okresy)[stoi(p_kodOkresu)]);
 			//std::cout << obec->nazov() << "\n";
 			//ObceStrom_.insert(std::stoi(p_kodObce), obec);
-			obseq->insert(std::stoi(p_kodObce), obec);
+			//obseq->insert(std::stoi(p_kodObce), obec);
+			obce->insert(std::stoi(p_kodObce), obec);
 		}
 		citacObce1.close();
 		citacObce2.close();
 
-		
+		/*
 		KriteriumNazov *p = new KriteriumNazov();
+		KriteriumOdovzdaneObalky *odobalky = new KriteriumOdovzdaneObalky(0);
+		KriteriumVolici* vol = new KriteriumVolici(0);
+		KriteriumUcast* uca = new KriteriumUcast(1);
 		//FilterNazov *f = new FilterNazov("Martin");
 		FilterJedenParam < std::string, UzemnaJednotka*>* fjp = new FilterJedenParam<std::string, UzemnaJednotka*>("Martin");
-		/*
+		
 		for (structures::TableItem<int, UzemnaJednotka*>*  element : ObceStrom_)
 		{
 			std::cout << p->ohodnot(*element->accessData());
 		}
 		*/
-		for ( structures::TableItem<int, UzemnaJednotka*>* element : *obseq)
-		{
-			p->ohodnot(element->accessData());
-		}
+		
 		/*
 		for (structures::TableItem<int, UzemnaJednotka*>* element : ObceStrom_)
 		{
 			fjp->filtruj(*element->accessData(), *p);
 			//std::cout << f->filtruj(*element->accessData(), *p);
 		}
-		*/
+		
+		for (structures::TableItem<int, UzemnaJednotka*>* element : *obseq)
+		{
+			p->ohodnot(element->accessData());
+		}
 		for (structures::TableItem<int, UzemnaJednotka*>* element : *obseq)
 		{
 			fjp->filtruj(element->accessData(), p);
 			//std::cout << f->filtruj(*element->accessData(), *p);
 		}
 		
-		structures::HeapSort<int, UzemnaJednotka,std::string> *sorter = new structures::HeapSort<int, UzemnaJednotka, std::string>;
-		sorter->sortMoj(obseq, p, true);
+		for (structures::TableItem<int, UzemnaJednotka*>* element : *sorObce)
+		{
+			p->ohodnot(element->accessData());
+		}
+		for (structures::TableItem<int, UzemnaJednotka*>* element : *sorObce)
+		{
+			fjp->filtruj(element->accessData(), p);
+			//std::cout << f->filtruj(*element->accessData(), *p);
+		}
+
+		structures::UnsortedSequenceTable<int, UzemnaJednotka*> * pomocny = new structures::UnsortedSequenceTable<int, UzemnaJednotka*>;
+		for (structures::TableItem<int,UzemnaJednotka*>* element : *sorObce)
+		{
+			pomocny->insert(element->getKey(), element->accessData());
+		}
+
+		structures::HeapSort<int, UzemnaJednotka, std::string> *sorterString = new structures::HeapSort<int, UzemnaJednotka, std::string>;
+		sorterString->sortMoj(pomocny, p, true);
 
 		int o = 1;
+		for (structures::TableItem<int, UzemnaJednotka*>* element : *pomocny)
+		{
+			std::cout << o;
+			std::cout << element->accessData()->nazov();
+			std::cout << "\n";
+			o++;
+		}
 
+		/*
+		structures::HeapSort<int, UzemnaJednotka,std::string> *sorterString = new structures::HeapSort<int, UzemnaJednotka, std::string>;
+		sorterString->sortMoj(obseq, p, true);
+
+		int o = 1;
 		for (structures::TableItem<int, UzemnaJednotka*>* element : *obseq)
 		{
 			std::cout << o;
@@ -198,5 +243,40 @@ CitanieDat::CitanieDat()
 			o++;
 		}
 
+		structures::HeapSort<int, UzemnaJednotka, int> *sorterInt = new structures::HeapSort<int, UzemnaJednotka, int>;		
+		sorterInt->sortMoj(obseq, odobalky, true);
+
+		o = 1;
+		for (structures::TableItem<int, UzemnaJednotka*>* element : *obseq)
+		{
+			std::cout << o;
+			std::cout << element->accessData()->nazov() << " " ;
+			std::cout << element->accessData()->pocetOdovzdanychObalokVKole(0);
+			std::cout << "\n";
+			o++;
+		}
+
+		structures::HeapSort<int, UzemnaJednotka, double> *sorterDouble = new structures::HeapSort<int, UzemnaJednotka, double>;
+		sorterDouble->sortMoj(obseq, uca, true);
+
+		o = 1;
+		for (structures::TableItem<int, UzemnaJednotka*>* element : *obseq)
+		{
+			std::cout << o;
+			std::cout << element->accessData()->nazov() << " ";
+			std::cout << element->accessData()->ucastVolicovVKole(1);
+			std::cout << "\n";
+			o++;
+		}
+		
+		*/
+		
+
+
 	}
+}
+
+CitanieDat::~CitanieDat()
+{
+
 }

@@ -40,10 +40,8 @@ namespace structures
 			{
 				vymena = false;
 				int otec = (aktualny - 1) / 2;
-				std::string prvy = krit->ohodnot(table->getItemAtIndex(aktualny).accessData());
-				std::string druhy = krit->ohodnot(table->getItemAtIndex(otec).accessData());
 
-				if (aktualny > 0 && (prvy > druhy))
+				if (aktualny > 0 && krit->ohodnot(table->getItemAtIndex(aktualny).accessData()) > krit->ohodnot(table->getItemAtIndex(otec).accessData()))
 				{
 					table->swap(table->getItemAtIndex(aktualny), table->getItemAtIndex(otec));
 					aktualny = otec;

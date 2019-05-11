@@ -1,18 +1,22 @@
 #include "Obec.h"
 
 Obec::Obec(Data* p_prveKolo, Data* p_druheKolo, int p_kodObce, std::string p_nazovObce, UzemnaJednotka *vyssi):
-	UzemnaJednotka(p_prveKolo,p_druheKolo,p_kodObce,p_nazovObce), vyssia(vyssi)
+	UzemnaJednotka(p_prveKolo,p_druheKolo,p_kodObce,p_nazovObce, vyssi)
 {
 }
 
-bool Obec::patriDoVyssiehoCelku(std::string nazovVyssiehoCelku)
+bool Obec::patriDoVyssiehoUzemnehoCelku(std::string nazov)
 {
-	return nazovVyssiehoCelku == vyssia->nazov() || nazovVyssiehoCelku == vyssia->dajVyssie()->nazov();
+	return nazov == vyssiaUzemnaJednotka->nazov() || nazov == vyssiaUzemnaJednotka->dajVyssie()->nazov();
 }
 
 std::string Obec::toString()
 {
-	return "Kod Obce: " + std::to_string(kod()) + " Nazov obce: " + nazov() + "\nPrve kolo: " + prveKolo->toString() + "\nDruhe kolo: " + druheKolo->toString();
+	return
+	"Kraj: " + vyssiaUzemnaJednotka->dajVyssie()->nazov() + 
+	" Okres: " + vyssiaUzemnaJednotka->nazov() +  " Obec: " + nazov() + 
+		"\nPrve kolo: " + prveKolo->toString() + 
+		"\nDruhe kolo: " + druheKolo->toString() + "\n";
 }
 
 

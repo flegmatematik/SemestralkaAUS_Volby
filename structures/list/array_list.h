@@ -270,7 +270,6 @@ namespace structures {
 	template<typename T>
 	inline void ArrayList<T>::clear()
 	{
-		delete array_;
 		size_ = 0;
 	}
 
@@ -289,7 +288,7 @@ namespace structures {
 	template<typename T>
 	inline void ArrayList<T>::enlarge()
 	{
-		Array<T>* newarray = new Array<T>(size_ + 10);
+		Array<T>* newarray = new Array<T>(size_*2);
 		Array<T>::copy(*array_, 0, *newarray, 0, size_);
 		delete array_;
 		array_ = newarray;

@@ -8,10 +8,10 @@ class FilterDvaParam :public Filter<P,T>
 protected:
 	P alfa;
 	P beta;
+
+public:
 	FilterDvaParam(P p_alfa, P p_beta);
 	~FilterDvaParam() = default;
-public:
-
 	bool filtruj(T objekt, Kriterium<P, T>* krit) override
 	{
 		P vysledok = krit->ohodnot(objekt);

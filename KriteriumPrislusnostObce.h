@@ -2,13 +2,13 @@
 #include "Kriterium.h"
 #include "Obec.h"
 
-class KriteriumPrislusnostObce : public Kriterium<bool,Obec*>
+class KriteriumPrislusnostObce : public Kriterium<bool,UzemnaJednotka*>
 {
 private:
 	std::string nazovVyssiehoCelku;
 public:
 	KriteriumPrislusnostObce(std::string p_nazovVyssiehoCelku);
 	virtual ~KriteriumPrislusnostObce();
-	bool ohodnot(Obec* objekt) override;
+	bool ohodnot(UzemnaJednotka* objekt) override;
 };
 

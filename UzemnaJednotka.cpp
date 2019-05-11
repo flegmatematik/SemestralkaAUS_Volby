@@ -86,6 +86,11 @@ int UzemnaJednotka::pocetPlatnych(int kolo)
 	}
 }
 
+bool UzemnaJednotka::patriDoVyssiehoUzemnehoCelku(std::string nazov)
+{
+	return false;
+}
+
 std::string UzemnaJednotka::toString()
 {
 	return nullptr;
@@ -96,4 +101,5 @@ UzemnaJednotka::~UzemnaJednotka()
 {
 	delete prveKolo;
 	delete druheKolo;
+	vyssiaUzemnaJednotka = nullptr;
 }

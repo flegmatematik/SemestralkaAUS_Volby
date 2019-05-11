@@ -8,10 +8,15 @@
 #include "structures/list/array_list.h"
 #include "Obec.h"
 #include "Okres.h"
+#include "structures/table/sorted_sequence_table.h"
 
 class CitanieDat
 {
+private:
 public:
-	CitanieDat();
+	CitanieDat(structures::SortedSequenceTable<int, UzemnaJednotka*>& kraje,
+		structures::SortedSequenceTable<int, UzemnaJednotka*>& okresy,
+		structures::SortedSequenceTable<int, UzemnaJednotka*>& obce);
+	~CitanieDat();
 };
 
