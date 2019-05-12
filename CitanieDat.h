@@ -2,9 +2,12 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include "../Volby/structures/heap_monitor.h"
 #include "../Volby/structures/table/binary_search_tree.h"
 #include "../Volby/Data.h"
 #include "UzemnaJednotka.h"
+#include "CitanieDat.h"
+#include "Kraj.h"
 #include "structures/list/array_list.h"
 #include "Obec.h"
 #include "Okres.h"

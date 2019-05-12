@@ -1,5 +1,5 @@
 #include "Data.h"
-
+#include "../Volby/structures/heap_monitor.h"
 
 Data::Data(int p_pocetVolicov, int p_vydaneObalky, double p_ucast, int p_odovzdaneObalky, int p_platneDokopy):
 		pocetVolicov(p_pocetVolicov), vydaneObalky(p_vydaneObalky),ucast(p_ucast), odovzdaneObalky(p_odovzdaneObalky),platneDokopy(p_platneDokopy)

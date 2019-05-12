@@ -6,6 +6,8 @@
 #include "FilterJedenParam.h"
 #include "structures/table/unsorted_sequence_table.h"
 #include "FilterDvaParam.h"
+#include "structures/table/sorting/heap_sort.h"
+#include "../Volby/structures/heap_monitor.h"
 
 class Rozhranie
 {
@@ -15,17 +17,22 @@ private:
 	structures::SortedSequenceTable<int, UzemnaJednotka*>* KrajeSequence;
 public:
 	Rozhranie();
-
+	void vyberTypUzemnejJednotky(structures::UnsortedSequenceTable<int, UzemnaJednotka*>& seqNaNaplnenie);
 	void vyberMoznosti();
-	void FiltrovaniePodlaKriteria();
+	void FiltrovaniePodlaKriteria(structures::UnsortedSequenceTable<int, UzemnaJednotka*>& seqNaFilter);
 
 	template <typename K, typename T, typename P, typename O>
 	void FiltrujJedenParameter(P alfa, Kriterium<O, T*>* krit, structures::UnsortedSequenceTable<K,T*>& seqNaFilter);
 
 	template <typename K, typename T, typename P, typename O>
 	void FiltrujDvaParametre(P alfa, P beta, Kriterium<O, T*>* krit, structures::UnsortedSequenceTable<K, T*>& seqNaFilter);
-	//void ZoradenieBezFiltrov();
+
+
 	void ZoradenieSFitrami();
+
+	template<typename K, typename T, typename P>
+	void Sortovanie(structures::UnsortedSequenceTable<K,T*>* seqNaSort, Kriterium<P,T*>* krit);
+
 	~Rozhranie();
 };
 
@@ -49,7 +56,10 @@ void Rozhranie::FiltrujJedenParameter(P alfa, Kriterium<O, T*>* krit, structures
 			seqNaFilter.insert(element->getKey(), element->accessData());
 		}
 	}
-	int p = 0;
+	delete krit;
+	delete pomocny;
+	delete filter_jeden;
+
 }
 
 
@@ -72,8 +82,18 @@ void Rozhranie::FiltrujDvaParametre(P alfa, P beta, Kriterium<O, T*>* krit, stru
 			seqNaFilter.insert(element->getKey(), element->accessData());
 		}
 	}
+	delete krit;
+	delete pomocny;
+	delete filter_dva;
 }
 
+template <typename K, typename T, typename P>
+void Rozhranie::Sortovanie(structures::UnsortedSequenceTable<K, T*>* seqNaSort, Kriterium<P, T*>* krit)
+{
+	structures::HeapSort<K, T, P>* sort = new structures::HeapSort<K, T, P>;
+	sort->sortMoj(seqNaSort, krit);
+	delete sort;
+}
 
 
 

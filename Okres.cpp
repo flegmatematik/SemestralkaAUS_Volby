@@ -1,4 +1,5 @@
 #include "Okres.h"
+#include "../Volby/structures/heap_monitor.h"
 
 
 Okres::Okres(Data* kolo1, Data* kolo2, int p_kodOkresu, std::string nazovOkresu, UzemnaJednotka* p_vyssiCelok) :
@@ -14,8 +15,4 @@ std::string Okres::toString()
 bool Okres::patriDoVyssiehoUzemnehoCelku(std::string nazov)
 {
 	return nazov == vyssiaUzemnaJednotka->nazov();
-}
-
-Okres::~Okres()
-{
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Filter.h"
+#include "../Volby/structures/heap_monitor.h"
 
 template<typename P, typename T>
 class FilterJedenParam :public Filter<P, T>

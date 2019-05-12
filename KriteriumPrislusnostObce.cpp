@@ -1,5 +1,5 @@
 #include "KriteriumPrislusnostObce.h"
-
+#include "../Volby/structures/heap_monitor.h"
 
 KriteriumPrislusnostObce::KriteriumPrislusnostObce(std::string p_nazovVyssiehoCelku)
 	:nazovVyssiehoCelku(p_nazovVyssiehoCelku)

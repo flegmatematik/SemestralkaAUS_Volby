@@ -1,4 +1,5 @@
 #pragma once
+#include "../Volby/structures/heap_monitor.h"
 #include "UzemnaJednotka.h"
 
 class Obec : public UzemnaJednotka
@@ -10,7 +11,7 @@ public:
 		UzemnaJednotka* vyssiCelok);
 	bool patriDoVyssiehoUzemnehoCelku(std::string nazov) override;
 	std::string toString() override;
-	~Obec();
-	
+
+	~Obec() override;
 };
 

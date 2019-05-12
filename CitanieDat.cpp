@@ -1,19 +1,5 @@
+#include "../Volby/structures/heap_monitor.h"
 #include "CitanieDat.h"
-#include <iostream>
-#include "Kraj.h"
-#include "Filter.h"
-#include "structures/tree/multi_way_tree.h"
-#include "KriteriumNazov.h"
-#include "structures/table/unsorted_sequence_table.h"
-#include "FilterJedenParam.h"
-#include "FilterNazov.h"
-#include "structures/table/sorting/heap_sort.h"
-#include "KriteriumOdovzdaneObalky.h"
-#include "KriteriumPrislusnostObce.h"
-#include "KriteriumVolici.h"
-#include "KriteriumUcast.h"
-#include "structures/table/sorted_sequence_table.h"
-
 
 CitanieDat::CitanieDat(structures::SortedSequenceTable<int, UzemnaJednotka*>& p_kraje,
 	structures::SortedSequenceTable<int, UzemnaJednotka*>& p_okresy,

@@ -3,6 +3,7 @@
 #include "sort.h"
 #include "../unsorted_sequence_table.h"
 #include "../../../Kriterium.h"
+#include <stack>
 
 namespace structures
 {
@@ -17,7 +18,7 @@ namespace structures
 		/// <summary> Utriedi tabulku triedenim Heap sort. </summary>
 		/// <param name = "table"> NonortedSequenceTable, ktoru ma utriedit. </param>
 		void sort(UnsortedSequenceTable<K, T>& table) override;
-		void sortMoj(UnsortedSequenceTable<K, T*>* table ,Kriterium<P, T*>* krit, bool vzostupne);
+		void sortMoj(UnsortedSequenceTable<K, T*>* table ,Kriterium<P, T*>* krit);
 	};
 
 	template <typename K, typename T,typename P>
@@ -28,12 +29,12 @@ namespace structures
 	}
 
 	template <typename K, typename T, typename P>
-	void HeapSort<K, T, P>::sortMoj(UnsortedSequenceTable<K, T*>* table, Kriterium<P, T*>* krit, bool vzostupne)
+	void HeapSort<K, T, P>::sortMoj(UnsortedSequenceTable<K, T*>* table, Kriterium<P, T*>* krit)
 	{
 		//TODO 12: HeapSort
 		int aktualny;
 		bool vymena;
-		for (int i = 0; i < table->size() - 1; ++i)
+		for (int i = 1; i < table->size(); ++i)
 		{
 			aktualny = i;
 			do
@@ -53,7 +54,7 @@ namespace structures
 
 		int max;
 		// i> 0 alebo i > 1
-		for (int i = table->size() - 1; i >1 ; --i)
+		for (int i = table->size() - 1; i > 0; --i)
 		{
 			table->swap(table->getItemAtIndex(0), table->getItemAtIndex(i));
 			aktualny = 0;
@@ -73,7 +74,7 @@ namespace structures
 					max = lavy < i ? lavy : pravy;
 
 				}
-				if (max < i && krit->ohodnot(table->getItemAtIndex(pravy).accessData()) > krit->ohodnot(table->getItemAtIndex(aktualny).accessData()))
+				if (max < i && krit->ohodnot(table->getItemAtIndex(max).accessData()) > krit->ohodnot(table->getItemAtIndex(aktualny).accessData()))
 				{
 					table->swap(table->getItemAtIndex(max), table->getItemAtIndex(aktualny));
 					aktualny = max;

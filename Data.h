@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "../Volby/structures/heap_monitor.h"
 
 class Data
 {

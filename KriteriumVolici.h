@@ -1,6 +1,7 @@
 #pragma once
 #include "Kriterium.h"
 #include "UzemnaJednotka.h"
+#include "../Volby/structures/heap_monitor.h"
 
 class KriteriumVolici : public Kriterium<int,UzemnaJednotka*>
 {

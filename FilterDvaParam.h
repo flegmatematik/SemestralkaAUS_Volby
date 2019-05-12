@@ -1,6 +1,6 @@
 #pragma once
 #include "Filter.h"
-
+#include "../Volby/structures/heap_monitor.h"
 template<typename P, typename T>
 class FilterDvaParam :public Filter<P,T>
 {

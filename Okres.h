@@ -1,5 +1,6 @@
 #pragma once
 #include "UzemnaJednotka.h"
+#include "../Volby/structures/heap_monitor.h"
 
 class Okres : public UzemnaJednotka
 {
@@ -11,7 +12,7 @@ public:
 
 	std::string toString() override;
 	bool patriDoVyssiehoUzemnehoCelku(std::string nazov) override;
-	~Okres();
+
 	
 };
 

@@ -1,4 +1,5 @@
 #include "UzemnaJednotka.h"
+#include "../Volby/structures/heap_monitor.h"
 
 UzemnaJednotka::UzemnaJednotka(Data *p_prveKolo, Data *p_druheKolo, int p_kodUzemnejJednotky, std::string p_nazovUzemnejJednotky, UzemnaJednotka *vyssia)
 	: prveKolo(p_prveKolo), druheKolo(p_druheKolo), nazovUzemnejJednotky(std::move(p_nazovUzemnejJednotky)), kodUzemnejJednotky(p_kodUzemnejJednotky), vyssiaUzemnaJednotka(vyssia)

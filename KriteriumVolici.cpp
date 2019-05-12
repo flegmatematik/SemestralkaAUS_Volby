@@ -1,5 +1,5 @@
 #include "KriteriumVolici.h"
-
+#include "../Volby/structures/heap_monitor.h"
 
 
 KriteriumVolici::KriteriumVolici(int p_kolo)

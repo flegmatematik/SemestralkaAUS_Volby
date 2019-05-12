@@ -1,4 +1,5 @@
 #include "KriteriumUcast.h"
+#include "../Volby/structures/heap_monitor.h"
 
 KriteriumUcast::KriteriumUcast(int p_kolo)
 	:kolo(p_kolo)

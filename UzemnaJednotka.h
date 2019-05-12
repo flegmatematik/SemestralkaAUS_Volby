@@ -2,6 +2,7 @@
 #include  "UzemnaJednotka.h"
 #include "Data.h"
 #include <utility>
+#include "../Volby/structures/heap_monitor.h"
 
 class UzemnaJednotka
 {	
@@ -18,7 +19,7 @@ public:
 	virtual bool patriDoVyssiehoUzemnehoCelku(std::string nazov);
 	virtual std::string toString();
 	UzemnaJednotka(Data *p_prveKolo, Data *p_druheKolo, int p_kodUzemnejJednotky, std::string p_nazovUzemnejJednotky, UzemnaJednotka* p_vyssia = nullptr);
-	~UzemnaJednotka();
+	virtual ~UzemnaJednotka();
 protected:
 	std::string nazovUzemnejJednotky;
 	int kodUzemnejJednotky;
