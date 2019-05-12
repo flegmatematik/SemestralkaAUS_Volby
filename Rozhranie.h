@@ -19,6 +19,7 @@ public:
 	Rozhranie();
 	void vyberTypUzemnejJednotky(structures::UnsortedSequenceTable<int, UzemnaJednotka*>& seqNaNaplnenie);
 	void vyberMoznosti();
+	void vyberSortu(structures::UnsortedSequenceTable<int, UzemnaJednotka*>* seqNaSort);
 	void FiltrovaniePodlaKriteria(structures::UnsortedSequenceTable<int, UzemnaJednotka*>& seqNaFilter);
 
 	template <typename K, typename T, typename P, typename O>
@@ -27,7 +28,7 @@ public:
 	template <typename K, typename T, typename P, typename O>
 	void FiltrujDvaParametre(P alfa, P beta, Kriterium<O, T*>* krit, structures::UnsortedSequenceTable<K, T*>& seqNaFilter);
 
-
+	void ZoradenieBezFiltrov();
 	void ZoradenieSFitrami();
 
 	template<typename K, typename T, typename P>

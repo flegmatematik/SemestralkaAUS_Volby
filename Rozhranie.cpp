@@ -80,7 +80,9 @@ void Rozhranie::vyberMoznosti()
 	}
 		break;
 	case 2:
-		//ZoradenieBezFiltrov();
+	{
+		ZoradenieBezFiltrov();
+	}
 		break;
 	case 3:
 		ZoradenieSFitrami();
@@ -90,6 +92,70 @@ void Rozhranie::vyberMoznosti()
 	}
 	vyberMoznosti();
 
+}
+
+void Rozhranie::vyberSortu(structures::UnsortedSequenceTable<int, UzemnaJednotka*>* seqNaSort)
+{
+	int vyberKriteria;
+	int vzostupne;
+	std::cout << "Vyberte podla akeho kriteria chcete vysledky triedit. \n";
+	std::cout << "1.Nazov \n2.PocetVolicov \n3.Ucast \n\n";
+	std::cin >> vyberKriteria;
+	std::cout << "Zvolte '1' ak vzostupne, a '0' ak zostupne \n\n";
+	std::cin >> vzostupne;
+
+	switch (vyberKriteria)
+	{
+	case 1:
+	{
+		KriteriumNazov* kritNazov = new KriteriumNazov;
+		Sortovanie(seqNaSort, kritNazov);
+		delete kritNazov;
+	}
+	break;
+	case 2:
+	{
+		int kolo_v;
+		std::cout << "\n--------------------------------------------------------------\n";
+		std::cout << "Zadajte '1' ak vas zaujimaju vysledky 1. kola, '2' ak druheho a '0' ak oboch \n";
+		std::cin >> kolo_v;
+		KriteriumVolici* kritVolici = new KriteriumVolici(kolo_v);
+		Sortovanie(seqNaSort, kritVolici);
+		delete kritVolici;
+	}
+	break;
+	case 3:
+	{
+		int kolo_u;
+		std::cout << "\n--------------------------------------------------------------\n";
+		std::cout << "Zadajte '1' ak vas zaujimaju vysledky 1. kola, '2' ak druheho. \n";
+		std::cin >> kolo_u;
+		KriteriumUcast* kritUcast = new KriteriumUcast(kolo_u);
+		Sortovanie(seqNaSort, kritUcast);
+		delete kritUcast;
+	}
+	break;
+	default:
+		ZoradenieSFitrami();
+	}
+
+
+	if (vzostupne == 1)
+	{
+		for (int i = 0; i < seqNaSort->size(); ++i)
+		{
+			std::cout << "\n--------------------------------------------------------------\n";
+			std::cout << seqNaSort->getItemAtIndex(i).accessData()->toString();
+		}
+	}
+	else if (vzostupne == 0)
+	{
+		for (int i = seqNaSort->size() - 1; i > -1; --i)
+		{
+			std::cout << "\n--------------------------------------------------------------\n";
+			std::cout << seqNaSort->getItemAtIndex(i).accessData()->toString();
+		}
+	}
 }
 
 
@@ -218,6 +284,14 @@ void Rozhranie::FiltrovaniePodlaKriteria(structures::UnsortedSequenceTable<int, 
 	}
 }
 
+void Rozhranie::ZoradenieBezFiltrov()
+{
+	structures::UnsortedSequenceTable<int, UzemnaJednotka*>* naZoradenie = new structures::UnsortedSequenceTable<int, UzemnaJednotka*>;
+	vyberTypUzemnejJednotky(*naZoradenie);
+	vyberSortu(naZoradenie);
+	delete naZoradenie;
+}
+
 void Rozhranie::ZoradenieSFitrami()
 {
 	structures::UnsortedSequenceTable<int, UzemnaJednotka*>* filtrovana = new structures::UnsortedSequenceTable<int, UzemnaJednotka*>;
@@ -228,68 +302,9 @@ void Rozhranie::ZoradenieSFitrami()
 	std::cout << "\n--------------------------------------------------------------\n";
 	std::cout << "Vyberte druhy filter. \n\n";
 	FiltrovaniePodlaKriteria(*filtrovana);
-	std::cout << "Vyberte podla akeho kriteria chcete vysledky triedit. \n";
-	int vyberKriteria;
-	int vzostupne;
-	std::cout << "1.Nazov \n2.PocetVolicov \n3.Ucast \n\n";
-	std::cin >> vyberKriteria;
-	std::cout << "Zvolte '1' ak vzostupne, a '0' ak zostupne \n\n";
-	std::cin >> vzostupne;
 
-	switch(vyberKriteria)
-	{
-	case 1:
-	{
-		KriteriumNazov* kritNazov = new KriteriumNazov;
-		Sortovanie(filtrovana, kritNazov);
-		delete kritNazov;
-	}
-		break;
-	case 2:
-	{
-		int kolo_v;
-		std::cout << "\n--------------------------------------------------------------\n";
-		std::cout << "Zadajte '1' ak vas zaujimaju vysledky 1. kola, '2' ak druheho a '0' ak oboch \n";
-		std::cin >> kolo_v;
-		KriteriumVolici* kritVolici = new KriteriumVolici(kolo_v);
-		Sortovanie(filtrovana, kritVolici);
-		delete kritVolici;
-	}
-		break;
-	case 3:
-	{
-		int kolo_u;
-		std::cout << "\n--------------------------------------------------------------\n";
-		std::cout << "Zadajte '1' ak vas zaujimaju vysledky 1. kola, '2' ak druheho. \n";
-		std::cin >> kolo_u;
-		KriteriumUcast* kritUcast = new KriteriumUcast(kolo_u);
-		Sortovanie(filtrovana, kritUcast);
-		delete kritUcast;
-	}
-		break;
-	default:
-		ZoradenieSFitrami();
-	}
-
-
-	if(vzostupne == 1)
-	{
-		for (int i = 0; i < filtrovana->size(); ++i)
-		{
-			std::cout << "\n--------------------------------------------------------------\n";
-			std::cout << filtrovana->getItemAtIndex(i).accessData()->toString();
-		}
-	}
-	else if(vzostupne == 0)
-	{
-		for (int i = filtrovana->size()-1; i >-1; --i)
-		{
-			std::cout << "\n--------------------------------------------------------------\n";
-			std::cout << filtrovana->getItemAtIndex(i).accessData()->toString();
-		}
-	}
+	vyberSortu(filtrovana);
 	delete filtrovana;
-	
 	
 }
 
